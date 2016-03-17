@@ -1,13 +1,10 @@
-var express = require('express')
-var app = express()
+var fs = require('fs');
 
-app.set('port', (process.env.PORT || 5000))
-app.use(express.static(__dirname + '/public'))
+var content;
+fs.readFile('./index.html', function read(err, data)
+{
+	if(err) {	throw err;	}
+	content = data;
+});
 
-app.get('/', function(request, response) {
-response.sendfile('fundstarter.html') 
-})
-
-app.listen(app.get('port'), function() {
-  console.log("Node app is running at localhost:" + app.get('port'))
-})
+console.log(content);
